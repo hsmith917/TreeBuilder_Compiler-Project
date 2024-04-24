@@ -36,14 +36,15 @@ using namespace std;
 
 %}
 
-
+/* 
+(maybe use this later?) 
 D[0-9]
 LD[a-zA-Z0-9]
-type[(void)(int)(double)(float)]
+type[(void)(int)(double)(float)] */
 
 %%
 
-/* Ignore comments */
+/* Ignore comments (from CMOS, maybe needed?)*/
 \/\*[^\*\/]*\*\/                  {} 
 \/\/+[^\n]*\n                 {}
 
@@ -55,7 +56,7 @@ type[(void)(int)(double)(float)]
 
 /* Literals */ 
 \"[^"]*\" {return TKSTRINGLITERAL;}
-[0-9]*  {return TKINTLITERAL;}
+[0-9]+  {return TKINTLITERAL;}
 
 /* Key words */
 buildnode   {return TKBUILDNODE;}
@@ -69,9 +70,6 @@ weight  {return TKWEIGHT;}
 
 /* Unmatched tokens */
 .   {return TKUNMATCHED;}
-
-
-
 
 %%
 
