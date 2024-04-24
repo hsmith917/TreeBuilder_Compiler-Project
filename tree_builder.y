@@ -1,10 +1,10 @@
 // Your YACC program to parse the grammar and perform syntactic analysis
 
-
+// Includes
 %{
 #include <stdio.h>
-#include "tree_node.h" // Include header file for tree node definitions
-#include "parse_tree.h" // Include header file for parsing functions
+#include "tree_node.h"
+#include "parse_tree.h" 
 
 %}
 
@@ -16,7 +16,7 @@
 %token L_BRACE R_BRACE L_PAREN R_PAREN
 %token IDENTIFIER
 
-//Rules
+// Rules
 %%
 
 program : statement_list
@@ -51,9 +51,8 @@ range : INT_LITERAL ':' INT_LITERAL
 
 %%
 
-//Auxiliary
+// Auxiliary
 int main() {
-    // Code to initiate parsing
     yyparse();
     return 0;
 }
