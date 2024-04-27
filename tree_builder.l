@@ -17,20 +17,20 @@
 using namespace std;
 
 //LOOPS
-#define TKFLOOP 001
-#define TKWLOOP 002
-#define TKDLOOP 003
+// #define TKFLOOP 001
+// #define TKWLOOP 002
+// #define TKDLOOP 003
 
-//LANGUAGE SPECIFIC WORDS
-#define TKBUILDNODE 004
-#define TKISCHILDOF 005
-#define TKNAME 006
-#define TKWEIGHT 007
+// //LANGUAGE SPECIFIC WORDS
+// #define TKBUILDNODE 004
+// #define TKISCHILDOF 005
+// #define TKNAME 006
+// #define TKWEIGHT 007
 
-//OTHER
-#define TKINTLITERAL 010
-#define TKSTRINGLITERAL 011
-#define TKUNMATCHED 255
+// //OTHER
+// #define TKINTLITERAL 010
+// #define TKSTRINGLITERAL 011
+// #define TKUNMATCHED 255
 
 
 %}
@@ -43,29 +43,23 @@ type[(void)(int)(double)(float)] */
 
 %%
 
-/* Ignore comments (from CMOS, maybe needed?)*/
-\/\*[^\*\/]*\*\/                  {} 
+\/\*[^\*\/]*\*\/                  {} /* Ignore comments (from CMOS, maybe needed?)*/
 \/\/+[^\n]*\n                 {}
 
-/* Ignore Whitespace */
-[ \t\n\f\r]	{} 
+[ \t\n\f\r]	{} /* Ignore Whitespace */
 
-/* Ignore semicolon, parenthesis, and brackets*/
-[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} 
+[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
 
-/* Literals */
-\"[^"]*\" {return TKSTRINGLITERAL;} 
+\"[^"]*\" {return TKSTRINGLITERAL;} /* Literals */
 [0-9]+  {return TKINTLITERAL;}
 
-/* Key words */
-buildnode   {return TKBUILDNODE;} 
+buildnode   {return TKBUILDNODE;} /* Key words */
 isachildof  {return TKISCHILDOF;}
 name    {return TKNAME;}
 weight  {return TKWEIGHT;}
 
 
-/* Unmatched tokens */
-.   {return TKUNMATCHED;} 
+.   {return TKUNMATCHED;} /* Unmatched tokens */
 
 %%
 
