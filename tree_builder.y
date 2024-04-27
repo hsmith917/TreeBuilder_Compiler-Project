@@ -5,28 +5,40 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "parse_tree.h"
-using namespace std;
 
-extern int yylex(); 
-extern char* yytext; 
-extern int yylval; 
 %}
 
-//Declarations
 %union {
-    int int_literal;
-    string string_literal;
+    char* s_val;
+    statement *s_ptr;
+    integer_expression *int_ptr;
+    string_expression *str_ptr;
+    compound_statement *c_ptr;
 }
 
-%token TKBUILDNODE FOR IN TKNAME TKWEIGHT TKISCHILDOF
-%token <string_literal> TKSTRINGLITERAL 
-%token <int_literal> TKINTLITERAL
-%token IDENTIFIER
+%{
+extern int yylex();
+extern void yyerror(char *String);  
 
+#include <iostream>
+ using namespace std;
+ #include "parse_tree.h"
 
+%}
 
-// Rules
+%start program
+%token TKBUILDNODE TKISCHILDOF TKNAME TKWEIGHT TKSTRINGLITERAL TKINTLITERAL FOR IN IDENTIFIER
+
+%left '*' '/' '%'
+%left '+' '-'
+
+%type <s_ptr> TKBUILDNODE FOR IN TKNAME TKWEIGHT TKISCHILDOF
+%type <str_ptr> TKSTRINGLITERAL
+%type <int_ptr> TKINTLITERAL
+%type <c_ptr> compound_statement
+
+//Declarations
+
 %%
 
 program : statement_list
@@ -66,5 +78,3 @@ int main() {
     yyparse();
     return 0;
 }
-
-
