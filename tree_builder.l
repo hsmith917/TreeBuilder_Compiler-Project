@@ -48,6 +48,8 @@ type[(void)(int)(double)(float)] */
 
 [ \t\n\f\r]	{} /* Ignore Whitespace */
 
+[+\-*/%{},;=\<\>()\[\]]                          {return yytext[0];}
+
 [;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
 
 \"[^"]*\" {return TKSTRINGLITERAL;} /* Literals */
