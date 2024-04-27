@@ -2,7 +2,7 @@
  * @file: node.h
  * @author: Johnathan Reilly and Hunter Smith
  * @date: 4/18/24
- * @brief: This is the header file for the node class for a binary tree. 
+ * @brief: This is the header file for the node struct for a tree. 
 */
 #include <string>
 #include <vector>
