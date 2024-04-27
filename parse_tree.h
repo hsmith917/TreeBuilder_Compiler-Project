@@ -116,28 +116,42 @@ class concatenate_expr : public string_expression {
 
 class build_statement { //note, this is from a version with binary trees
 	public:
-		build_statement(map<string, Tree_Node> &sym_tab, string_expression *n, integer_expression *w, string_expression *childOf)
+		build_statement(map<string, node> &sym_tab, string_expression *n, integer_expression *w, string_expression *childOf)
  		{
 			name = n;
 			weight = w;
 			isachildof = childOf;
 		}				
-		virtual void evaluate_statement(map<string, Tree_Node> &sym_tab)	
+		virtual void evaluate_statement(map<string, node> &sym_tab)	
 		{	//create the new node
-			Tree_Node *t = new Tree_Node;
+			node *t = new node;
 			t->name = name->evaluate_expression;
 			t->weight = w->evaluate_expression;	
-			t->r_child = NULL;
-			Tree_Node *parent;	// find the parent
-			map<string, Tree_Node>::iterator p;
+
+			node *parent;	// find the parent
+			map<string, node>::iterator p;
 			p =sym_tab.find(isachildof->evaluate_expression);
 			if (&p!=sym_tab.end())
  			{	parent = p.second;		}
-			if (parent->r_child == NULL)
-			{	t->l_sibling = NULL;	}
-			else	{t.->l_sibling = parent->r_child;	}
-			parent->r_child = t;
-			sym_tab.insert(pair<string, Tree_Node>(t.name, *t));
+
+			// if (parent->r_child == NULL)
+			// {	t->l_sibling = NULL;	}
+			// else	{t.->l_sibling = parent->r_child;	}
+			// parent->r_child = t;
+      // bool condition = true;
+      // for(vector<node*>::iterator it = parent->children.begin(); it < parent->children.end(); ++it){
+      //   if((*it)->weight > w && condition){
+      //     parent->children.insert(it, tmp);
+      //     condition = false;
+      //   }
+      // }
+      // if(condition){
+      //   root->children.push_back(tmp);
+      // }
+      insert(parent, t->name, t->weight, parent->name);
+      
+
+			sym_tab.insert(pair<string, node>(t.name, *t));
 		}
 	private:
 		string_expression *name;
