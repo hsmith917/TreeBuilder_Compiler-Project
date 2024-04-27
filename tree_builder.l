@@ -43,25 +43,29 @@ type[(void)(int)(double)(float)] */
 
 %%
 
-\/\*[^\*\/]*\*\/                  {} /* Ignore comments (from CMOS, maybe needed?)*/
+/* Ignore comments (from CMOS, maybe needed?)*/
+\/\*[^\*\/]*\*\/                  {} 
 \/\/+[^\n]*\n                 {}
 
-[ \t\n\f\r]	{} /* Ignore Whitespace */
+/* Ignore Whitespace */
+[ \t\n\f\r]	{} 
 
-[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
+/* Ignore semicolon, parenthesis, and brackets*/
+[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} 
 
-\"[^"]*\" {return TKSTRINGLITERAL;} /* Literals */
+/* Literals */
+\"[^"]*\" {return TKSTRINGLITERAL;} 
 [0-9]+  {return TKINTLITERAL;}
 
-
-buildnode   {return TKBUILDNODE;} /* Key words */
+/* Key words */
+buildnode   {return TKBUILDNODE;} 
 isachildof  {return TKISCHILDOF;}
 name    {return TKNAME;}
 weight  {return TKWEIGHT;}
 
 
-
-.   {return TKUNMATCHED;} /* Unmatched tokens */
+/* Unmatched tokens */
+.   {return TKUNMATCHED;} 
 
 %%
 

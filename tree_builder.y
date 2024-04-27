@@ -2,19 +2,32 @@
 
 // Includes
 %{
-#include <stdio.h>
-#include "tree_node.h"
-#include "parse_tree.h" 
+#include <iostream>
+#include <vector>
+#include <string>
+#include "parse_tree.h"
+using namespace std;
 
+extern int yylex(); 
+extern char* yytext; 
+extern int yylval; 
 %}
 
 //Declarations
+%union {
+    int int_literal;
+    string string_literal;
+}
+
 %token BUILDNODE FOR IN NAME WEIGHT ISACHILDOF
-%token STRING_LITERAL INT_LITERAL
-%token RANGE SEMICOLON 
+%token <string_literal> STRING_LITERAL 
+%token <int_literal> INT_LITERAL
+%token SEMICOLON COLON
 %token COMMA PLUS EQUALS
-%token L_BRACE R_BRACE L_PAREN R_PAREN
+%token L_BRACE R_BRACE
 %token IDENTIFIER
+
+
 
 // Rules
 %%
@@ -37,16 +50,16 @@ attribute_list : attribute
                | attribute_list attribute
                ;
 
-attribute : NAME '=' STRING_LITERAL SEMICOLON
-          | WEIGHT '=' INT_LITERAL SEMICOLON
-          | ISACHILDOF '=' STRING_LITERAL SEMICOLON
+attribute : NAME EQUALS STRING_LITERAL SEMICOLON
+          | WEIGHT EQUALS INT_LITERAL SEMICOLON
+          | ISACHILDOF EQUALS STRING_LITERAL SEMICOLON
           ;
 
-loop_statement : FOR IDENTIFIER IN '[' range ']' L_BRACE statement_list R_BRACE
+loop_statement : FOR IDENTIFIER IN L_BRACE range R_BRACE L_BRACE statement_list R_BRACE
                ;
 
-range : INT_LITERAL ':' INT_LITERAL
-      | STRING_LITERAL ',' range
+range : INT_LITERAL COLON INT_LITERAL
+      | STRING_LITERAL COMMA range
       ;
 
 %%
