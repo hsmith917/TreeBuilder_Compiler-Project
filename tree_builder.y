@@ -18,7 +18,6 @@
   integer_expression *int_ptr;
   string_expression *str_ptr;
   compound_statement *c_ptr;
-  int int_constant;
 }
 
 %{
@@ -31,16 +30,15 @@ using namespace std;
 %}
 
 %start start_var
-%token <s_val> TKBUILDNODE TKSTRINGLITERAL FOR IN IDENTIFIER
+%token <s_val> TKBUILDNODE TKSTRINGLITERAL FOR IN IDENTIFIER TKINTLITERAL
 %token <s_val> TKISCHILDOF TKNAME TKWEIGHT TKID TKINT
-%token <int_constant> TKINTLITERAL
 %left '*' '/' '%'
 %left '+' '-'
 
 //%type <s_val> TKID TKINT TKNAME TKWEIGHT TKISCHILDOF //FOR IN IDENTIFIER
 %type <str_ptr> string_expression //TKSTRINGLITERAL
 %type <int_ptr> integer_expression //TKINTLITERAL
-%type <s_ptr> statement build_statement attribute loop_statement attribute_list range int_assignment_statement string_assignment_statement
+%type <s_ptr> statement build_statement loop_statement range int_assignment_statement string_assignment_statement
 %type <c_ptr> prog start_var
 
 //Declarations
@@ -80,8 +78,8 @@ string_expression : TKID {$$ = new string_constant($1);}
                 | '(' string_expression ')' {$$ = $2;}
                 ;
 
-build_statement : TKBUILDNODE '{' string_expression ';' integer_expression ';' string_expression ';' '}' ';' {$$ = new build_statement($3, $5, $7);}
-                | TKBUILDNODE '{' string_expression ';' integer_expression ';' '}' ';' {$$ = new root_statement($3, $5);}
+build_statement : TKBUILDNODE '{' TKNAME '=' string_expression ';' TKWEIGHT '=' integer_expression ';' TKISCHILDOF '=' string_expression ';' '}' ';' {$$ = new build_statement($5, $9, $13);}
+                | TKBUILDNODE '{' TKNAME '=' string_expression ';' TKWEIGHT '=' integer_expression ';' '}' ';' {$$ = new root_statement($5, $9);}
                 ;
 
 /* attribute_list : attribute
