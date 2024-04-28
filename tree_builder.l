@@ -1,6 +1,6 @@
 %{
 //*****************************************************************************************
-// Filename: treebuilder.l
+// Filename: tree_builder.l
 // Authors: Hunter Smith and Johnathan Reilly
 // Brief: A LEX program that tokenizes tree building commands
 // ****************************************************************************************
@@ -48,18 +48,17 @@ type[(void)(int)(double)(float)] */
 
 [ \t\n\f\r]	{} /* Ignore Whitespace */
 
-[+\-*/%{},;=\<\>()\[\]]                          {return yytext[0];}
-
-[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
-
-\"[^"]*\" {return TKID;} /* Literals TKSTRINGLITERAL*/
-[0-9]+  {return TKINT;} /*TKINTLITERAL */
-
 buildnode   {return TKBUILDNODE;} 
 isachildof  {return TKISCHILDOF;}
 name    {return TKNAME;}
 weight  {return TKWEIGHT;}
 
+[+\-*/%{},;=\<\>]                          {return yytext[0];}
+
+\"[^"]*\" {return TKID;} /* Literals TKSTRINGLITERAL*/
+[0-9]+  {return TKINT;} /*TKINTLITERAL */
+
+[;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
 
 
 

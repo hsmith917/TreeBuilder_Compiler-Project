@@ -1,9 +1,8 @@
-/**
- * @file: node.h
- * @author: Johnathan Reilly and Hunter Smith
- * @date: 4/18/24
- * @brief: This is the header file for the node struct for a tree. 
-*/
+//*****************************************************************************************
+// Filename: tree_node.h
+// Authors: Hunter Smith and Johnathan Reilly
+// Brief: contains the node struct
+// ****************************************************************************************
 #include <string>
 #include <vector>
 #include <iostream>
@@ -16,7 +15,7 @@ struct node{
 };
 
 void insert(node*& root, string n, int w, string parent){
-    if(root==nullptr){
+    if(root==nullptr || n == "root"){
         root = new node;
         root -> name = n;
         root -> weight = w;

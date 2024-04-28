@@ -49,52 +49,46 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    BUILDNODE = 258,
-    FOR = 259,
-    IN = 260,
-    NAME = 261,
-    WEIGHT = 262,
-    ISACHILDOF = 263,
-    STRING_LITERAL = 264,
-    INT_LITERAL = 265,
-    SEMICOLON = 266,
-    COLON = 267,
-    COMMA = 268,
-    PLUS = 269,
-    EQUALS = 270,
-    L_BRACE = 271,
-    R_BRACE = 272,
-    IDENTIFIER = 273
+    TKBUILDNODE = 258,
+    TKSTRINGLITERAL = 259,
+    FOR = 260,
+    IN = 261,
+    IDENTIFIER = 262,
+    TKISCHILDOF = 263,
+    TKNAME = 264,
+    TKWEIGHT = 265,
+    TKID = 266,
+    TKINT = 267,
+    TKINTLITERAL = 268
   };
 #endif
 /* Tokens.  */
-#define BUILDNODE 258
-#define FOR 259
-#define IN 260
-#define NAME 261
-#define WEIGHT 262
-#define ISACHILDOF 263
-#define STRING_LITERAL 264
-#define INT_LITERAL 265
-#define SEMICOLON 266
-#define COLON 267
-#define COMMA 268
-#define PLUS 269
-#define EQUALS 270
-#define L_BRACE 271
-#define R_BRACE 272
-#define IDENTIFIER 273
+#define TKBUILDNODE 258
+#define TKSTRINGLITERAL 259
+#define FOR 260
+#define IN 261
+#define IDENTIFIER 262
+#define TKISCHILDOF 263
+#define TKNAME 264
+#define TKWEIGHT 265
+#define TKID 266
+#define TKINT 267
+#define TKINTLITERAL 268
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "tree_builder.y"
+#line 15 "tree_builder.y"
 
-    int int_literal;
-    string string_literal;
+  char* s_val;
+  statement *s_ptr;
+  integer_expression *int_ptr;
+  string_expression *str_ptr;
+  compound_statement *c_ptr;
+  int int_constant;
 
-#line 98 "y.tab.h"
+#line 92 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

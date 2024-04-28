@@ -1,9 +1,13 @@
-// Code file containing class definitions and code to respond to the statements in the code.
+//*****************************************************************************************
+// Filename: parse_tree.h
+// Authors: Hunter Smith and Johnathan Reilly
+// ****************************************************************************************
 #include <map>
 #include <string>
 #include <set>
 #include <algorithm>
 #include <iostream>
+#include <cstddef>
 #include "tree_node.h"
 
 using namespace std;
@@ -44,17 +48,17 @@ class plus_expr: public integer_expression {
 
 class variable: public integer_expression {
  public:
-  variable(char *in_val) {//cout << "Found variable = " << in_val << endl; 
+  variable(char *in_val) {cout << "Found variable = " << in_val << endl; 
                           saved_val =in_val;}
 
   virtual int evaluate_expression(map<string, node> &sym_tab) {
 
     map<string,node>::iterator p;
     p =sym_tab.find(saved_val);
-    //cout << "Looking up variable " << saved_val << endl;
+    cout << "Looking up variable " << saved_val << endl;
     if (p!=sym_tab.end()) {
-      //cout << "Returning value of variable " << saved_val << endl;
-      //cout << "= " << p->second << endl;
+      cout << "Returning value of variable " << saved_val << endl;
+      cout << "= " << p->second.weight << endl;
 
       return p->second.weight;
     } else {
@@ -137,6 +141,7 @@ class build_statement: public statement { //note, this is from a version with bi
 			node *t = new node;
 			t->name = name->evaluate_expression(sym_tab);
 			t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
+      cout << t->name << " and " << t->weight << endl;
 
 			node *parent;	// find the parent
 			map<string, node>::iterator p;
@@ -151,7 +156,31 @@ class build_statement: public statement { //note, this is from a version with bi
 		string_expression *name;
 		integer_expression  *weight;
 		string_expression  *isachildof;
-	};
+};
+
+class root_statement: public statement { //note, this is from a version with binary trees
+public:
+  root_statement(string_expression *n, integer_expression *w)
+  {
+    name = n;
+    weight = w;
+    isachildof = nullptr;
+  }			
+  virtual void evaluate_statement(map<string, node> &sym_tab)	
+  {	//create the new node
+    node *t = new node;
+    t->name = name->evaluate_expression(sym_tab);
+    t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
+    cout << t->name << " and " << t->weight << endl;
+
+    insert(t, "root", t->weight, ""); //changed from binary tree
+    sym_tab.insert(pair<string, node>(t->name, *t)); //changed from t.name to t->name
+  }
+private:
+  string_expression *name;
+  integer_expression  *weight;
+  string_expression  *isachildof;
+};
 
 
 class int_assignment_statement: public statement {
@@ -164,7 +193,7 @@ class int_assignment_statement: public statement {
     
     int temp = r_side->evaluate_expression(sym_tab);
 
-    //cout << "Assigning" << ident << " to " << temp << endl;
+    cout << "Assigning" << ident << " to " << temp << endl;
 
     sym_tab[ident].weight=temp; //added .weight
   }
@@ -185,7 +214,7 @@ class string_assignment_statement: public statement {
     
     string temp = r_side->evaluate_expression(sym_tab);
 
-    //cout << "Assigning" << ident << " to " << temp << endl;
+    cout << "Assigning" << ident << " to " << temp << endl;
 
     sym_tab[ident].name=temp; //added .name
   }
@@ -195,3 +224,4 @@ class string_assignment_statement: public statement {
     string ident;
     string_expression *r_side;
   };
+

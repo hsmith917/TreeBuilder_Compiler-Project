@@ -1,4 +1,9 @@
 // Your YACC program to parse the grammar and perform syntactic analysis
+//*****************************************************************************************
+// Filename: tree_builder.y
+// Authors: Hunter Smith and Johnathan Reilly
+// Brief: A YACC program
+// ****************************************************************************************
 // Includes
 %{
 #include <vector>
@@ -75,17 +80,18 @@ string_expression : TKID {$$ = new string_constant($1);}
                 | '(' string_expression ')' {$$ = $2;}
                 ;
 
-build_statement : TKBUILDNODE '{' string_expression integer_expression string_expression '}' ';' {$$ = new build_statement($3, $4, $5);}
+build_statement : TKBUILDNODE '{' string_expression ';' integer_expression ';' string_expression ';' '}' ';' {$$ = new build_statement($3, $5, $7);}
+                | TKBUILDNODE '{' string_expression ';' integer_expression ';' '}' ';' {$$ = new root_statement($3, $5);}
                 ;
 
 /* attribute_list : attribute
                | attribute_list attribute
-               ;
+               ; */
 
-attribute : TKNAME '=' string_expression ';' {$$ = new string_assignment_statement($1,$3);} //might need string_expression instead of literal
-          | TKWEIGHT '=' integer_expression ';' {$$ = new int_assignment_statement($1,$3);} //same thing here with int
+/* attribute : TKNAME '=' string_expression ';' {$$ = $3;}
+          | TKWEIGHT '=' integer_expression ';' {$$ = new int_assignment_statement($1,$3);}
           | TKISCHILDOF '=' string_expression ';' {$$ = new string_assignment_statement($1,$3);}
-          ; */
+          ;  */
 
 loop_statement : FOR IDENTIFIER IN '[' range ']' '{' prog '}' {}
                ;
