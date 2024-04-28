@@ -1,22 +1,9 @@
-# Compiler
-CC = g++
-
-# Compiler flags
-CFLAGS = -std=c++11 -Wall
-
-all: test scanner
-
-scanner: lex.yy.c
-	$(CC) $(CFLAGS) -o $@ $^
-
-test: test.cc
-	$(CC) $(CFLAGS) -o $@ $^
-
-lex.yy.c: tree_builder.l
-	flex $^
-
-
-clean:
-	rm -f test lex.yy.c scanner
-
-.PHONY: all clean
+all:a.out
+a.out:y.tab.c lex.yy.c parse_tree.h
+	g++ -o a.out y.tab.c -ll
+prog.tab.c:tree_builder.y parse_tree.h
+	bison tree_builder.y
+	cat y.tab.c | sed 's/  __attribute__ ((__unused__))/\/\/ /g' >temp.cc
+	mv temp.cc y.tab.c
+lex.yy.c:tree_builder.l
+	flex tree_builder.l

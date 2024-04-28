@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include <fstream>
-//#include "y.tab.h" //for yacc tokens
+#include "y.tab.h" //for yacc tokens
 
 using namespace std;
 
@@ -52,24 +52,29 @@ type[(void)(int)(double)(float)] */
 
 [;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
 
-\"[^"]*\" {return TKSTRINGLITERAL;} /* Literals */
-[0-9]+  {return TKINTLITERAL;}
+\"[^"]*\" {return TKID;} /* Literals TKSTRINGLITERAL*/
+[0-9]+  {return TKINT;} /*TKINTLITERAL */
 
-buildnode   {return TKBUILDNODE;} /* Key words */
+buildnode   {return TKBUILDNODE;} 
 isachildof  {return TKISCHILDOF;}
 name    {return TKNAME;}
 weight  {return TKWEIGHT;}
 
 
-.   {return TKUNMATCHED;} /* Unmatched tokens */
+
 
 %%
+
 
 int yywrap(){
 	return true;
 }
 
 //temporary to test lex
+/* buildnode   {return TKBUILDNODE;} / Key words 
+isachildof  {return TKISCHILDOF;}
+name    {return TKNAME;}
+weight  {return TKWEIGHT;}
 int main(){
 	int token = 0;
 	ofstream fout;
@@ -88,4 +93,4 @@ int main(){
 	else{
 		cout << "failed to open scanner out file" << endl;
 	}
-}
+} */
