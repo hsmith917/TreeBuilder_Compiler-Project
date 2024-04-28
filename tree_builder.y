@@ -68,7 +68,7 @@ string_expression : TKID { $$ = new string_constant($1); }
                 | '(' string_expression ')' { $$ = $2; };
 
 %%
-
+t
 int main() {
   yyparse();
   return 0;
