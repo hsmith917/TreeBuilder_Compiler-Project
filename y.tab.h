@@ -50,30 +50,20 @@ extern int yydebug;
   enum yytokentype
   {
     TKBUILDNODE = 258,
-    TKSTRINGLITERAL = 259,
-    FOR = 260,
-    IN = 261,
-    IDENTIFIER = 262,
-    TKISCHILDOF = 263,
-    TKNAME = 264,
-    TKWEIGHT = 265,
-    TKID = 266,
-    TKINT = 267,
-    TKINTLITERAL = 268
+    TKISCHILDOF = 259,
+    TKNAME = 260,
+    TKWEIGHT = 261,
+    TKID = 262,
+    TKINT = 263
   };
 #endif
 /* Tokens.  */
 #define TKBUILDNODE 258
-#define TKSTRINGLITERAL 259
-#define FOR 260
-#define IN 261
-#define IDENTIFIER 262
-#define TKISCHILDOF 263
-#define TKNAME 264
-#define TKWEIGHT 265
-#define TKID 266
-#define TKINT 267
-#define TKINTLITERAL 268
+#define TKISCHILDOF 259
+#define TKNAME 260
+#define TKWEIGHT 261
+#define TKID 262
+#define TKINT 263
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -86,9 +76,8 @@ union YYSTYPE
   integer_expression *int_ptr;
   string_expression *str_ptr;
   compound_statement *c_ptr;
-  int int_constant;
 
-#line 92 "y.tab.h"
+#line 81 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

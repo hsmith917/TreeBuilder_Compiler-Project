@@ -1,14 +1,1 @@
-buildnode {
-  name = "root";
-  weight = 5;
-};
-buildnode {
-  name = "A";
-  weight = 2;
-  isachildof="root";
-};
-buildnode {
-  name = "B";
-  weight = 2;
-  isachildof="root";
-};
+buildnode{name="root";weight=5;}; buildnode {name = "A" ; weight = 2 ; isachildof = "root" ; } ; buildnode { name = "B" ; weight = 2 ; isachildof = "root" ; } ;

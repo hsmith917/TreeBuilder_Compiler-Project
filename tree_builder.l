@@ -43,23 +43,24 @@ type[(void)(int)(double)(float)] */
 
 %%
 
-\/\*[^\*\/]*\*\/                  {} /* Ignore comments (from CMOS, maybe needed?)*/
-\/\/+[^\n]*\n                 {}
 
 [ \t\n\f\r]	{} /* Ignore Whitespace */
 
-buildnode   {return TKBUILDNODE;} 
-isachildof  {return TKISCHILDOF;}
-name    {return TKNAME;}
-weight  {return TKWEIGHT;}
+buildnode	{return TKBUILDNODE;} 
+isachildof	{return TKISCHILDOF;}
+name	{return TKNAME;}
+weight	{return TKWEIGHT;}
+
+\"[^\"]*\" {yylval.s_val = strdup(yytext);
+	return TKID;} /* Literals TKSTRINGLITERAL*/
+[0-9]+  {yylval.s_val = strdup(yytext);
+	return TKINT;} /*TKINTLITERAL */
 
 [+\-*/%{},;=\<\>]                          {return yytext[0];}
 
-\"[^"]*\" {return TKID;} /* Literals TKSTRINGLITERAL*/
-[0-9]+  {return TKINT;} /*TKINTLITERAL */
-
 [;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
-
+\/\*[^\*\/]*\*\/                  {} /* Ignore comments (from CMOS, maybe needed?)*/
+\/\/+[^\n]*\n                 {}
 
 
 %%

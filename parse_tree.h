@@ -48,17 +48,17 @@ class plus_expr: public integer_expression {
 
 class variable: public integer_expression {
  public:
-  variable(char *in_val) {cout << "Found variable = " << in_val << endl; 
+  variable(char *in_val) {//cout << "Found variable = " << in_val << endl; 
                           saved_val =in_val;}
 
   virtual int evaluate_expression(map<string, node> &sym_tab) {
 
     map<string,node>::iterator p;
     p =sym_tab.find(saved_val);
-    cout << "Looking up variable " << saved_val << endl;
+    //cout << "Looking up variable " << saved_val << endl;
     if (p!=sym_tab.end()) {
-      cout << "Returning value of variable " << saved_val << endl;
-      cout << "= " << p->second.weight << endl;
+      //cout << "Returning value of variable " << saved_val << endl;
+      //cout << "= " << p->second.weight << endl;
 
       return p->second.weight;
     } else {
@@ -135,13 +135,13 @@ class build_statement: public statement { //note, this is from a version with bi
 			name = n;
 			weight = w;
 			isachildof = childOf;
-		}			
+		}
 		virtual void evaluate_statement(map<string, node> &sym_tab)	
 		{	//create the new node
 			node *t = new node;
 			t->name = name->evaluate_expression(sym_tab);
 			t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
-      cout << t->name << " and " << t->weight << endl;
+      //cout << t->name << " and " << t->weight << endl;
 
 			node *parent;	// find the parent
 			map<string, node>::iterator p;
@@ -171,9 +171,9 @@ public:
     node *t = new node;
     t->name = name->evaluate_expression(sym_tab);
     t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
-    cout << t->name << " and " << t->weight << endl;
+    //cout << t->name << " and " << t->weight << endl;
 
-    insert(t, "root", t->weight, ""); //changed from binary tree
+    insert(t, "root", t->weight, "noone"); //changed from binary tree
     sym_tab.insert(pair<string, node>(t->name, *t)); //changed from t.name to t->name
   }
 private:
@@ -193,7 +193,7 @@ class int_assignment_statement: public statement {
     
     int temp = r_side->evaluate_expression(sym_tab);
 
-    cout << "Assigning" << ident << " to " << temp << endl;
+    //cout << "Assigning" << ident << " to " << temp << endl;
 
     sym_tab[ident].weight=temp; //added .weight
   }
@@ -214,7 +214,7 @@ class string_assignment_statement: public statement {
     
     string temp = r_side->evaluate_expression(sym_tab);
 
-    cout << "Assigning" << ident << " to " << temp << endl;
+    //cout << "Assigning" << ident << " to " << temp << endl;
 
     sym_tab[ident].name=temp; //added .name
   }
