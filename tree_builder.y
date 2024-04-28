@@ -51,7 +51,7 @@ start_var : prog { // At this point, the
                    map<string,node> my_sym_tab;
                    $$= $1;
                    $1->evaluate_statement(my_sym_tab);
-                   //printTree(my_sym_tab[0]);
+                   //printTree(my_sym_tab.begin());
 }
 
 prog : statement prog {$$ = new compound_statement($1,$2);}

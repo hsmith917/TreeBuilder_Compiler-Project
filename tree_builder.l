@@ -35,11 +35,7 @@ using namespace std;
 
 %}
 
-/* 
-(maybe use this later?) 
-D[0-9]
-LD[a-zA-Z0-9]
-type[(void)(int)(double)(float)] */
+
 
 %%
 
@@ -52,14 +48,14 @@ name	{return TKNAME;}
 weight	{return TKWEIGHT;}
 
 \"[^\"]*\" {yylval.s_val = strdup(yytext);
-	return TKID;} /* Literals TKSTRINGLITERAL*/
+	return TKID;} 
 [0-9]+  {yylval.s_val = strdup(yytext);
-	return TKINT;} /*TKINTLITERAL */
+	return TKINT;} 
 
 [+\-*/%{},;=\<\>]                          {return yytext[0];}
 
 [;\(\)\{\}\.\,\<\>\%\'\$\_\^\[\]\:\\\?\	] {} /* Ignore semicolon, parenthesis, and brackets*/
-\/\*[^\*\/]*\*\/                  {} /* Ignore comments (from CMOS, maybe needed?)*/
+\/\*[^\*\/]*\*\/                  {} /* Ignore comments */
 \/\/+[^\n]*\n                 {}
 
 

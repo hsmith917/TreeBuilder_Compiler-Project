@@ -141,7 +141,7 @@ class build_statement: public statement { //note, this is from a version with bi
 			node *t = new node;
 			t->name = name->evaluate_expression(sym_tab);
 			t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
-      //cout << t->name << " and " << t->weight << endl;
+      cout << "<" << t->name << "," << t->weight << ">" << endl;
 
 			node *parent;	// find the parent
 			map<string, node>::iterator p;
@@ -171,7 +171,7 @@ public:
     node *t = new node;
     t->name = name->evaluate_expression(sym_tab);
     t->weight = weight->evaluate_expression(sym_tab);	//changed from w to weight
-    //cout << t->name << " and " << t->weight << endl;
+    cout << "<" << t->name << "," << t->weight << ">";
 
     insert(t, "root", t->weight, "noone"); //changed from binary tree
     sym_tab.insert(pair<string, node>(t->name, *t)); //changed from t.name to t->name
@@ -224,4 +224,3 @@ class string_assignment_statement: public statement {
     string ident;
     string_expression *r_side;
   };
-

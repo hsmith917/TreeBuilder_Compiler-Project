@@ -1345,7 +1345,7 @@ yyreduce:
                    map<string,node> my_sym_tab;
                    (yyval.c_ptr)= (yyvsp[0].c_ptr);
                    (yyvsp[0].c_ptr)->evaluate_statement(my_sym_tab);
-                   //printTree(my_sym_tab[0]);
+                   //printTree(my_sym_tab.begin());
 }
 #line 1351 "tree_builder.tab.c"
     break;

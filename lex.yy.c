@@ -512,12 +512,7 @@ using namespace std;
 
 
 #line 515 "lex.yy.c"
-/* 
-(maybe use this later?) 
-D[0-9]
-LD[a-zA-Z0-9]
-type[(void)(int)(double)(float)] */
-#line 521 "lex.yy.c"
+#line 516 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -734,11 +729,11 @@ YY_DECL
 		}
 
 	{
-#line 44 "tree_builder.l"
+#line 40 "tree_builder.l"
 
 
 
-#line 742 "lex.yy.c"
+#line 737 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -798,70 +793,70 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 47 "tree_builder.l"
+#line 43 "tree_builder.l"
 {} /* Ignore Whitespace */
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 49 "tree_builder.l"
+#line 45 "tree_builder.l"
 {return TKBUILDNODE;} 
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 50 "tree_builder.l"
+#line 46 "tree_builder.l"
 {return TKISCHILDOF;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 51 "tree_builder.l"
+#line 47 "tree_builder.l"
 {return TKNAME;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 52 "tree_builder.l"
+#line 48 "tree_builder.l"
 {return TKWEIGHT;}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 54 "tree_builder.l"
+#line 50 "tree_builder.l"
 {yylval.s_val = strdup(yytext);
-	return TKID;} /* Literals TKSTRINGLITERAL*/
+	return TKID;} 
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 56 "tree_builder.l"
+#line 52 "tree_builder.l"
 {yylval.s_val = strdup(yytext);
-	return TKINT;} /*TKINTLITERAL */
+	return TKINT;} 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 59 "tree_builder.l"
+#line 55 "tree_builder.l"
 {return yytext[0];}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 61 "tree_builder.l"
+#line 57 "tree_builder.l"
 {} /* Ignore semicolon, parenthesis, and brackets*/
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 62 "tree_builder.l"
-{} /* Ignore comments (from CMOS, maybe needed?)*/
+#line 58 "tree_builder.l"
+{} /* Ignore comments */
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 63 "tree_builder.l"
+#line 59 "tree_builder.l"
 {}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 66 "tree_builder.l"
+#line 62 "tree_builder.l"
 ECHO;
 	YY_BREAK
-#line 865 "lex.yy.c"
+#line 860 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1866,7 +1861,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 66 "tree_builder.l"
+#line 62 "tree_builder.l"
 
 
 
